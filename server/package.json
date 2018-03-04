@@ -1,0 +1,29 @@
+{
+  "name": "happy_bar_server",
+  "version": "1.0.0",
+  "description": "It will provide data server for web-end(client and mobile)",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasonAndLily/HappyBar.git"
+  },
+  "keywords": [
+    "HappyBar",
+    "Server",
+    "Node",
+    "Express"
+  ],
+  "author": "Eason Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EasonAndLily/HappyBar/issues"
+  },
+  "homepage": "https://github.com/EasonAndLily/HappyBar#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "jsonfile": "^4.0.0"
+  }
+}
