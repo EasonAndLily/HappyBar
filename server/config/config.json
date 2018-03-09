@@ -1,8 +1,14 @@
 {
     "serverPort": 1314,
+    "loacalURL": "http://127.0.0.1:1314",
     "database" : {
         "url" : "mongodb://127.0.0.1",
         "port" : 27017,
         "dbName" : "HappyBar"
+    },
+    "proxyServer" : {
+        "port": 8888,
+        "ip": "192.168.0.107", 
+        "url": "http://192.168.0.107:8888"
     }
 }
