@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import HomeNav from './home_nav.js';
+import CarouselVideo from './carousel_video.js';
 
 // import APIS from './service/common/apis.js';
 // import FetchUtils from './service/common/fetchUtils.js';
@@ -82,6 +83,7 @@ export default class HomePage extends Component<> {
     return (
       <View style={styles.container}>
         <HomeNav />
+        <CarouselVideo />
       </View>
     );
   }
