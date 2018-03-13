@@ -9,81 +9,21 @@ import {
 
 import HomeNav from './home_nav.js';
 import CarouselVideo from './carousel_video.js';
+import ContentList from './content_list.js';
 
 // import APIS from './service/common/apis.js';
 // import FetchUtils from './service/common/fetchUtils.js';
 export default class HomePage extends Component<> {
   constructor(props) {
     super(props);
-    
-    // this.getData = this.getData.bind(this);
-
-    // let ds = new ListView.DataSource({
-    //     rowHasChanged: (oldRow, newRow) => {
-    //         oldRow !== newRow;
-    //     },
-    // });
-    // this.state = {dataSource: ds};
   }
-
-  // componentWillMount() {
-  //     this.getData();
-  // }
-
-  // getData() {
-  //   let url = APIS.getAllComedies;
-  //   var _this = this;
-  //   FetchUtils.getRequest(url, function(comedies) {
-  //     console.log(comedies);
-  //     let ds = new ListView.DataSource({
-  //         rowHasChanged: (oldRow, newRow) => {
-  //             oldRow !== newRow;
-  //         },
-  //     });
-  //     _this.setState({dataSource: ds.cloneWithRows(comedies)});
-  //   }, function(err) {
-  //     alert(err);
-  //   });
-  // }
-
-  // renderRow(comedy) {
-  //     return (
-  //         <View style={styles.movieItem}>
-  //             <View style={styles.movieDiscription}>
-  //               <Text style={styles.title}>
-  //                 {comedy.title}
-  //               </Text>
-  //               <Text style={styles.year}>
-  //                 {comedy.playTime}
-  //               </Text>
-  //             </View>
-  //         </View>
-  //     );
-  // }
-
-  // renderHeader() {
-  //     return (
-  //         <View style={styles.header}>
-  //             <Text style={styles.headerText}>
-  //                 Comedies List
-  //             </Text>
-  //             <View style={styles.headerLine}></View>
-  //         </View>
-  //     );
-  // }
-
-  // renderSeparator(sectionID:number, rowID:number) {
-  //     return (
-  //         <View style={styles.separator} key={sectionID+rowID}>
-  //         </View>
-  //     );
-  // }
 
   render() {
     return (
       <View style={styles.container}>
         <HomeNav />
         <CarouselVideo />
+        <ContentList />
       </View>
     );
   }
