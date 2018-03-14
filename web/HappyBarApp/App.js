@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {
   Platform,
-  StyleSheet,
   Text,
   View,
-  StatusBar
+  StyleSheet,
 } from 'react-native';
+
 import Header from './views/header.js';
 import BottomNav  from './views/bottom_nav.js';
+import AppStyles from './styles/app_styles.js';
+
+const styles = StyleSheet.create(AppStyles);
 
 
 export default class App extends Component<{}> {
@@ -24,9 +27,3 @@ export default class App extends Component<{}> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-  }
-});

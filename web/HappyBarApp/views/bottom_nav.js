@@ -4,14 +4,15 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar
 } from 'react-native';
 
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomePage from './home/home.js';
-
+import BottomNavStyles from '../styles/header_styles.js';
+import {COLORS, FONT_SIZE} from '../static/static_data.js';
+const styles = StyleSheet.create(BottomNavStyles);
 export default class BottomNav extends Component<{}> {
   constructor(props) {
     super(props);
@@ -27,8 +28,8 @@ export default class BottomNav extends Component<{}> {
             title="首页"
             titleStyle={styles.title}
             selectedTitleStyle={styles.selectTitle}
-            renderIcon={()=><Icon name="home" size={25} color="#617984"/>}
-            renderSelectedIcon={()=><Icon name="home" size={25} color="#60b003"/>}
+            renderIcon={()=><Icon name="home" size={FONT_SIZE.navSize} color={COLORS.themeGray}/>}
+            renderSelectedIcon={()=><Icon name="home" size={FONT_SIZE.navSize} color={COLORS.themeGreen}/>}
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <HomePage />
           </TabNavigator.Item>
@@ -37,8 +38,8 @@ export default class BottomNav extends Component<{}> {
             title="会员"
             titleStyle={styles.title}
             selectedTitleStyle={styles.selectTitle}
-            renderIcon={()=><Icon name="vimeo" size={25} color="#617984"/>}
-            renderSelectedIcon={()=><Icon name="vimeo" size={25} color="#60b003"/>}
+            renderIcon={()=><Icon name="vimeo" size={FONT_SIZE.navSize} color={COLORS.themeGray}/>}
+            renderSelectedIcon={()=><Icon name="vimeo" size={FONT_SIZE.navSize} color={COLORS.themeGreen}/>}
             onPress={() => this.setState({ selectedTab: 'vip' })}>
             <Text>
               vip
@@ -49,8 +50,8 @@ export default class BottomNav extends Component<{}> {
             title="评论"
             titleStyle={styles.title}
             selectedTitleStyle={styles.selectTitle}
-            renderIcon={()=><Icon name="comment" size={25} color="#617984"/>}
-            renderSelectedIcon={()=><Icon name="comment" size={25} color="#60b003"/>}
+            renderIcon={()=><Icon name="comment" size={FONT_SIZE.navSize} color={COLORS.themeGray}/>}
+            renderSelectedIcon={()=><Icon name="comment" size={FONT_SIZE.navSize} color={COLORS.themeGreen}/>}
             onPress={() => this.setState({ selectedTab: 'comment' })}>
             <Text>
               comment
@@ -61,8 +62,8 @@ export default class BottomNav extends Component<{}> {
             title="我的"
             titleStyle={styles.title}
             selectedTitleStyle={styles.selectTitle}
-            renderIcon={()=><Icon name="user" size={25} color="#617984"/>}
-            renderSelectedIcon={()=><Icon name="user" size={25} color="#60b003"/>}
+            renderIcon={()=><Icon name="user" size={FONT_SIZE.navSize} color={COLORS.themeGray}/>}
+            renderSelectedIcon={()=><Icon name="user" size={FONT_SIZE.navSize} color={COLORS.themeGreen}/>}
             onPress={() => this.setState({ selectedTab: 'mine' })}>
             <Text>
               mine
@@ -72,12 +73,3 @@ export default class BottomNav extends Component<{}> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    title: {
-        color: '#617984'
-    },
-    selectTitle: {
-        color: '#60b003'
-    }
-});

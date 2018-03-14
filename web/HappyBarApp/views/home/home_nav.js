@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import HomeNavStyles from '../../styles/home/home_nav_styles.js';
+const styles = StyleSheet.create(HomeNavStyles);
 export default class HomeNav extends Component {
     constructor(props) {
         super(props);
@@ -36,27 +37,3 @@ export default class HomeNav extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        height: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
-    text: {
-        flexGrow: 1,
-        fontSize: 18,
-        color: '#617984'
-    },
-    selectedText: {
-        flexGrow: 1,
-        color: '#60b003',
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginLeft: 30
-    },
-    icon: {
-        flexGrow: 1,
-    }
-});

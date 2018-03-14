@@ -8,6 +8,9 @@ import {
   ListView,
   Dimensions
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ContentListStyle from '../../styles/home/content_list_styles.js';
+import {COLORS} from '../../static/static_data.js';
 
 const tempDate = [{
     title: "暴走大事件",
@@ -38,7 +41,7 @@ const tempDate = [{
     imageUrl: 'http://pic6.qiyipic.com/image/20180227/c8/b8/v_115024909_m_601_180_101.jpg',
     name: '王尼玛发福了！'
 }];
-
+const styles = StyleSheet.create(ContentListStyle);
 export default class ContentList extends Component {
     constructor(props) {
         super(props);
@@ -53,22 +56,23 @@ export default class ContentList extends Component {
     renderRow(comedy) {
         return (
             <View style={styles.comedyItem}>
-              <View>
+              <View style={styles.titleContainer}>
                 <Text style={styles.title}>
                   {comedy.title}
                 </Text>
+                <Icon name="angle-right" style={styles.titleIcon} size={22} color={COLORS.themeGray} />
               </View>
               <View style={styles.separator}>
               </View>
               <View style={styles.imageContainer}>
                 <View style={styles.imageAndText}>
-                  <Image source={{uri: comedy.imageUrl}} style={styles.image}/>
+                  <Image source={{uri: comedy.imageUrl}} style={styles.imageLeft}/>
                   <Text style={styles.name}>
                     {comedy.name}
                   </Text>
                 </View>
                 <View style={styles.imageAndText}>
-                  <Image source={{uri: comedy.imageUrl}} style={styles.image}/>
+                  <Image source={{uri: comedy.imageUrl}} style={styles.imageRight}/>
                   <Text style={styles.name}>
                     {comedy.name}
                   </Text>
@@ -86,45 +90,3 @@ export default class ContentList extends Component {
         );
     }
 }
-export const deviceWidth = Dimensions.get('window').width; 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 10,
-    },
-    separator: {
-        height: 1,
-        backgroundColor: "#617984",
-        marginBottom: 3,
-        width: deviceWidth - 25,
-    },
-    comedyItem: {
-      flexDirection: "column",
-      padding: 5,
-      margin: 5,
-    },
-    title: {
-        fontSize: 18,
-        color: '#617984',
-        fontWeight: '200',
-        fontFamily: 'unset'
-    },
-    imageContainer: {
-        flexDirection: 'row',
-        alignItems: "center",
-    },
-    imageAndText: {
-        flexDirection: 'column',
-        flexGrow: 1,
-    },
-    image: {
-        height: 100,
-        width: deviceWidth / 2 - 14,
-    },
-    name: {
-        fontSize: 12,
-        color: '#617984',
-        fontFamily: 'unset'
-    }
-
-});

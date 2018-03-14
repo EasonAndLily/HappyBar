@@ -8,7 +8,9 @@ import {
 } from 'react-native';
 
 import Carousel from 'react-native-carousel';
+import CarouselVideoStyles from '../../styles/home/carousel_video_styles.js';
 
+const styles = StyleSheet.create(CarouselVideoStyles);
 export default class CarouselVideo extends Component {
     constructor(props) {
         super(props);
@@ -47,21 +49,3 @@ export default class CarouselVideo extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        height: 200,
-    },
-    item: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'transparent',
-      },
-    images: {
-        height: 200,
-        flex: 1,
-        marginLeft: 5,
-        marginRight: 5,
-    }
-});
