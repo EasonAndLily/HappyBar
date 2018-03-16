@@ -6,18 +6,13 @@ var comedySchema = new mongoose.Schema({
     title : String,
     subTitle : String,
     playTime : String,
-    // playPath : String,
-    // poster : String,
-    // diagram : String,
-    // createTime : Date,
-    // updateTeime : Date,
-    // description : String,
-    // grade : Number,
-    // periods : String,
-    // playTimes : Number,
-    // praiseTimes :Number,
-    // category : String,
-    // author : String
+    poster: String,
+    periods : String,
+    description : String,
+    video: String,
+    playAmount: Number,
+    thumbsUpAmount: Number,
+    collectAmount: Number,
 });
 
 comedySchema.statics = {
@@ -35,8 +30,18 @@ comedySchema.statics = {
     getComedyById : function(id, callBack){
         return this.findOne({_id:id}).exec(callBack);
     },
-    getCommdiesByConditions : function(findCondition, limitNumber, skipeNumber, callBack){
-        return this.find(findCondition).limit(limitNumber).skip(skipeNumber).sort({"periods":-1}).exec(callBack);
+    getCommdiesByConditions : function(findCondition, limitNumber, skipeNumber, sort, callBack){
+        return new Promise((resolve, reject) => {
+            this.find(findCondition).limit(limitNumber).skip(skipeNumber).sort(sort).exec((err, data) => {
+                if(err) {
+                    reject(data);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+
+        //return this.find(findCondition).limit(limitNumber).skip(skipeNumber).sort(sort).exec(callBack);
     },
     insertCommdy : function(comedy){
         this.insert(comedy);
