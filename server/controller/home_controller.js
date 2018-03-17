@@ -14,7 +14,6 @@ let comedyController = {
             res.json(homeComedies);
         });
     }
-
 }
 
 module.exports = comedyController;

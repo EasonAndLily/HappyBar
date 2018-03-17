@@ -1,8 +1,8 @@
-let comedyRouter = require('./comedy_router');
+let comedyRouter = require('./home_router');
 
 class Router {
     constructor(app) {
-        app.use('/comedies', comedyRouter);
+        app.use('/home', comedyRouter);
     }
 };
 

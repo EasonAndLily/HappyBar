@@ -1,7 +1,6 @@
 let jsonfile = require('jsonfile');
 let express = require('express');
 let mongoose = require('mongoose');
-let comedyController = require('./controller/comedy_controller');
 let Router = require('./routes/router');
 
 // Get the config data and connect the mongodb.
