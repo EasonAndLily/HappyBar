@@ -13,7 +13,6 @@ const CarouselVideoStyles = {
     images: {
         height: 200,
         width: DEVICE.width - 10,
-        borderRadius: 10,
     }
 };
 

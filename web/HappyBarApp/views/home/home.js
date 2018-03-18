@@ -13,6 +13,8 @@ import HomeNav from './home_nav.js';
 import CarouselVideo from './carousel_video.js';
 import ContentList from './content_list.js';
 import HomeStyles from '../../styles/home/home_styles.js';
+import APIS from '../../service/common/apis.js';
+import FetchUtils from '../../service/common/fetchUtils.js';
 
 const styles = StyleSheet.create(HomeStyles);
 export default class HomePage extends Component<> {

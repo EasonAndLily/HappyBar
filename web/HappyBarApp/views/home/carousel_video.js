@@ -1,51 +1,82 @@
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
+  Dimensions,
   Image
 } from 'react-native';
-
-import Carousel from 'react-native-carousel';
+import Carousel from 'react-native-looped-carousel';
 import CarouselVideoStyles from '../../styles/home/carousel_video_styles.js';
+import {DEVICE} from '../../static/static_data.js';
+import APIS from '../../service/common/apis.js';
+import FetchUtils from '../../service/common/fetchUtils.js';
 
 const styles = StyleSheet.create(CarouselVideoStyles);
 export default class CarouselVideo extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    render () {
-        return (
-            <View style={styles.container}>
-                <Carousel
-                hideIndicators={false} // Set to true to hide the indicators
-                indicatorColor="#60b003" // Active indicator color
-                indicatorSize={30} // Indicator bullet size
-                indicatorSpace={15} // space between each indicator
-                inactiveIndicatorColor="#617984" // Inactive indicator color
-                indicatorAtBottom={false} // Set to false to show the indicators at the top
-                indicatorOffset={160} // Indicator relative position from top or bottom
-                //onPageChange={callback} // Called when the active page changes
-                // inactiveIndicatorText= '•' // Inactive indicator content ( You can customize to use any Unicode character )
-                // indicatorText= '•' // Active indicator content ( You can customize to use any Unicode character )
+  constructor(props) {
+    super(props);
 
-                animate={true} // Enable carousel autoplay
-                delay={2500} // Set Animation delay between slides
-                loop={true} // Allow infinite looped animation. Depends on Prop {...animate} set to true.
-                >
-                <View style={styles.item}>
-                  <Image source={require('../../images/001.jpg')} style={styles.images}></Image>
-                </View>
-                <View style={styles.item}>
-                  <Image source={require('../../images/002.jpg')} style={styles.images}></Image>
-                </View>
-                <View style={styles.item}>
-                  <Image source={require('../../images/003.jpg')} style={styles.images}></Image>
-                </View>
-              </Carousel>
-          </View>
-        );
+    this.state = {
+      size: { 
+        width: DEVICE.width, 
+        "height" : 200 
+      },
+      carouselComedies: []
+    };
+    this.getHomeData = this.getHomeData.bind(this);
+  }
+
+  componentWillMount () {
+      this.getHomeData();
+  }
+
+  getHomeData() {
+    let homeURL = APIS.getHomeComedies
+    FetchUtils.getRequest(homeURL, (data)=> {
+      this.setState({
+        carouselComedies: data.carouselComedies
+      });
+    }, (err) => {
+      alert(err);
+    });
+  }
+
+  generateVideos(carouselComedies) {
+    let carousels = [];
+    if (carouselComedies.length <= 0) {
+      carousels.push(<View key="1"><Text>No Data</Text></View>);
+    } else {
+      carouselComedies.map((val)=> {
+        carousels.push(<View key={val._id} style={styles.item}>
+                  <Image resizeMode="contain" source={{uri: val.poster}} style={styles.images}></Image>
+                </View>);
+      });
     }
+    
+    return carousels;
+  }
+
+  _onLayoutDidChange = (e) => {
+    const layout = e.nativeEvent.layout;
+    this.setState({ size: { width: layout.width, height: layout.height } });
+  }
+
+  render() {
+    let carouselsView = this.generateVideos(this.state.carouselComedies);
+    return (
+      <View style={styles.container} onLayout={this._onLayoutDidChange}>
+        <Carousel
+          delay={2000}
+          style={this.state.size}
+          autoplay
+          pageInfo
+          onAnimateNextPage={(p) => console.log(p)}
+        >
+          {carouselsView}
+        </Carousel>
+      </View>
+    );
+  }
 }
