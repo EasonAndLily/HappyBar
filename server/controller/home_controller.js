@@ -13,7 +13,7 @@ let comedyController = {
         comedyService.getHomePageComedies((homeComedies) => {
             res.json(homeComedies);
         });
-    }
+    },
 }
 
 module.exports = comedyController;

@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var Promise = require('promise');
-
+let Schema = mongoose.Schema;
 var comedySchema = new mongoose.Schema({
-    name : String,
+    _id: Schema.Types.ObjectId,
+    nameCategory : {type: Schema.Types.ObjectId, ref: 'comedy_name_category' },
     title : String,
     subTitle : String,
     playTime : String,
@@ -32,7 +33,7 @@ comedySchema.statics = {
     },
     getCommdiesByConditions : function(findCondition, limitNumber, skipeNumber, sort, callBack){
         return new Promise((resolve, reject) => {
-            this.find(findCondition).limit(limitNumber).skip(skipeNumber).sort(sort).exec((err, data) => {
+            this.find(findCondition).populate('nameCategory').limit(limitNumber).skip(skipeNumber).sort(sort).exec((err, data) => {
                 if(err) {
                     reject(data);
                 } else {
@@ -40,8 +41,6 @@ comedySchema.statics = {
                 }
             });
         });
-
-        //return this.find(findCondition).limit(limitNumber).skip(skipeNumber).sort(sort).exec(callBack);
     },
     insertCommdy : function(comedy){
         this.insert(comedy);
