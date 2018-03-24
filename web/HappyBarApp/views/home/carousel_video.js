@@ -22,25 +22,8 @@ export default class CarouselVideo extends Component {
       size: { 
         width: DEVICE.width, 
         "height" : 200 
-      },
-      carouselComedies: []
+      }
     };
-    this.getHomeData = this.getHomeData.bind(this);
-  }
-
-  componentWillMount () {
-      this.getHomeData();
-  }
-
-  getHomeData() {
-    let homeURL = APIS.getHomeComedies
-    FetchUtils.getRequest(homeURL, (data)=> {
-      this.setState({
-        carouselComedies: data.carouselComedies
-      });
-    }, (err) => {
-      alert(err);
-    });
   }
 
   generateVideos(carouselComedies) {
@@ -64,7 +47,7 @@ export default class CarouselVideo extends Component {
   }
 
   render() {
-    let carouselsView = this.generateVideos(this.state.carouselComedies);
+    let carouselsView = this.generateVideos(this.props.carouselComedies);
     return (
       <View style={styles.container} onLayout={this._onLayoutDidChange}>
         <Carousel

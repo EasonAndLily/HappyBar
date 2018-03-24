@@ -20,6 +20,28 @@ const styles = StyleSheet.create(HomeStyles);
 export default class HomePage extends Component<> {
   constructor(props) {
     super(props);
+    this.getData = this.getData.bind(this);
+    this.state = {
+      carouselComedies: [],
+      categoryComedies: []
+    };
+  }
+
+  componentDidMount() {
+      this.getData();
+  }
+
+  getData() {
+    let homeURL = APIS.getHomeComedies
+    FetchUtils.getRequest(homeURL, (data)=> {
+      this.setState({
+        carouselComedies: data.carouselComedies,
+        categoryComedies: data.categoryComedies
+      });
+      
+    }, (err) => {
+      alert(err);
+    });
   }
 
   render() {
@@ -32,8 +54,8 @@ export default class HomePage extends Component<> {
                 <RefreshControl refreshing={false} tintColor="red" 
                 title="freshing..." onRefresh={this.refresh}/>
               }>
-          <CarouselVideo />
-          <ContentList />
+          <CarouselVideo carouselComedies={this.state.carouselComedies}/>
+          <ContentList categoryComedies={this.state.categoryComedies}/>
         </ScrollView>
       </View>
     );

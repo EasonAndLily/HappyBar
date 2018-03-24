@@ -10,7 +10,7 @@ let comedyService = {
     getHomePageComedies: function(callback) {
         Promise.all([
             comedyEntity.getCommdiesByConditions({}, 4, 0, {'playAmount': -1}),
-            comedyNameCategroy.getComediesUnderCategory(1)
+            comedyNameCategroy.getComediesUnderCategory(2)
         ]).then((data) => {
             let homeComedies = {};
             homeComedies.carouselComedies = data[0];
