@@ -10,8 +10,11 @@ import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomePage from './home/home.js';
+import CommonVideo from './video/common_video.js';
+import VideoPlayer from './video/video_player.js';
 import BottomNavStyles from '../styles/header_styles.js';
 import {COLORS, FONT_SIZE} from '../static/static_data.js';
+
 const styles = StyleSheet.create(BottomNavStyles);
 export default class BottomNav extends Component<{}> {
   constructor(props) {
@@ -41,9 +44,7 @@ export default class BottomNav extends Component<{}> {
             renderIcon={()=><Icon name="vimeo" size={FONT_SIZE.navSize} color={COLORS.themeGray}/>}
             renderSelectedIcon={()=><Icon name="vimeo" size={FONT_SIZE.navSize} color={COLORS.themeGreen}/>}
             onPress={() => this.setState({ selectedTab: 'vip' })}>
-            <Text>
-              vip
-            </Text>
+            <VideoPlayer />
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'comment'}
