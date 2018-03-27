@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import Video from 'react-native-video';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {COLORS, FONT_SIZE} from '../../static/static_data.js';
 
 export default class VideoPlayer extends Component {
 
@@ -22,6 +24,7 @@ export default class VideoPlayer extends Component {
     duration: 0.0,
     currentTime: 0.0,
     paused: true,
+    poster: 'http://puui.qpic.cn/qqvideo_ori/0/w0026wt3aoj_496_280/0.jpg',
   };
 
   video: Video;
@@ -90,6 +93,10 @@ export default class VideoPlayer extends Component {
     )
   }
 
+  pausedOrPlay() {
+    this.setState({ paused: !this.state.paused });
+  }
+
   render() {
     const flexCompleted = this.getCurrentTimePercentage() * 100;
     const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
@@ -98,14 +105,15 @@ export default class VideoPlayer extends Component {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.fullScreen}
-          onPress={() => this.setState({ paused: !this.state.paused })}
+          onPress={this.pausedOrPlay.bind(this)}
         >
           <Video
             ref={(ref: Video) => { this.video = ref }}
             /* For ExoPlayer */
             //source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }}
            // source={require('./broadchurch.mp4')}
-            source={{uri: "http://vali.cp31.ott.cibntv.net/youku/69757de0e304971d07fb4533e/03000A01005AA8E27E53891518ABB5C68960D8-7ECD-6F50-AE98-E417C4E5FCA4.mp4?sid=052206983900010001862_00_Ada93d82d9e2c7632a9ff4d12d3ed70ab&sign=552ad78c2fda073a15a56e00a0536d41&ctype=50", mainVer: 1, patchVer: 0}}
+            source={{uri: "http://116.211.73.14/sports.tc.qq.com/AB4oMLlRVL9UDYG3Blw2az5JoxCOh9lbldp0B8782gjk/s0026zjmd65.p201.1.mp4?sdtfrom=v1001&type=mp4&vkey=37C92CA6905675DFD259EE73CF243AB7CDA1BB9DB758C5CAB0858B93D18C7749FFD428DB1948602CB30BB0C6108EBF243CC687B7B87CFE6A5A8A8C892C1B77A48D6641608276E74F9BCE5E90A8F5505AEED122C4969BBB4A3152994C2CD5F8E54A448D2C4301F209E27C204498E8B443137ED849CD0B63E2&level=0&platform=11&br=284&fmt=shd&sp=0&guid=044D977072DAA5BA1CFA5F26A09F0C6B5BB2299C&locid=94f07dc8-b4bb-4443-bcda-1838ba3be7c4&size=64091857&ocid=385032108", mainVer: 1, patchVer: 0}}
+            //poster={this.state.poster}
             style={styles.fullScreen}
             rate={this.state.rate}
             paused={this.state.paused}
@@ -120,6 +128,13 @@ export default class VideoPlayer extends Component {
             repeat={false}
           />
         </TouchableOpacity>
+
+        {
+            this.state.paused ?
+            (<TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })}>
+                <Icon name="play" size={FONT_SIZE.pausedSize} color={COLORS.pausedWhite}/>
+            </TouchableOpacity>) : (null)
+        }
 
         <View style={styles.controls}>
           <View style={styles.generalControls}>
@@ -145,9 +160,19 @@ export default class VideoPlayer extends Component {
           </View>
 
           <View style={styles.trackingControls}>
+            <TouchableOpacity onPress={() => this.setState({ paused: !this.state.paused })} style={styles.pausedIcon}>
+                {
+                    this.state.paused ? 
+                    <Icon name="play" size={FONT_SIZE.minPausedSize} color={COLORS.pausedWhite}/>
+                    : <Icon name="pause" size={FONT_SIZE.minPausedSize} color={COLORS.pausedWhite}/>
+                }
+            </TouchableOpacity>
             <View style={styles.progress}>
               <View style={[styles.innerProgressCompleted, { flex: flexCompleted }]} />
               <View style={[styles.innerProgressRemaining, { flex: flexRemaining }]} />
+            </View>
+            <View style={styles.expandIcon}>
+                <Icon name="expand" size={FONT_SIZE.minPausedSize} color={COLORS.pausedWhite}/>
             </View>
           </View>
         </View>
@@ -160,6 +185,7 @@ export default class VideoPlayer extends Component {
 const styles = StyleSheet.create({
   container: {
     height: 200,
+    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
@@ -175,22 +201,36 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 5,
     position: 'absolute',
-    bottom: 20,
+    bottom: 10,
     left: 20,
     right: 20,
+  },
+  trackingControls: {
+    display: 'flex',
+    flexDirection: 'row',
+    height: 20,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   progress: {
     flex: 1,
     flexDirection: 'row',
-    borderRadius: 3,
+    borderRadius: 2,
     overflow: 'hidden',
   },
+  pausedIcon: {
+    width: 30,
+  },
+  expandIcon: {
+    width: 30,
+    paddingLeft: 10,
+  },
   innerProgressCompleted: {
-    height: 20,
+    height: 2,
     backgroundColor: '#cccccc',
   },
   innerProgressRemaining: {
-    height: 20,
+    height: 2,
     backgroundColor: '#2C2C2C',
   },
   generalControls: {

@@ -5,6 +5,7 @@ import {
 const COLORS = {
     themeGreen: '#60b003',
     themeGray: '#617984',
+    pausedWhite: "#fff",
 };
 
 const DEVICE = {
@@ -13,7 +14,9 @@ const DEVICE = {
 }
 
 const FONT_SIZE = {
-    navSize: 25
+    navSize: 25,
+    pausedSize: 40,
+    minPausedSize: 20,
 }
 
 export {COLORS, DEVICE, FONT_SIZE};
