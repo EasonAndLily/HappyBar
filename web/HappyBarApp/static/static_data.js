@@ -15,7 +15,7 @@ const DEVICE = {
 
 const FONT_SIZE = {
     navSize: 25,
-    pausedSize: 40,
+    pausedSize: 35,
     minPausedSize: 20,
 }
 
