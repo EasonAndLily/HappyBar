@@ -1,8 +1,12 @@
 const HomeStyles = {
-    container: {
+  container: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fff',
+  },
+  imgLogo: {
+    height: 30,
+    width: 30,
   },
   scrollView: {
     flexDirection: 'column',

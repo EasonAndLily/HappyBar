@@ -6,7 +6,6 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import Header from './views/header.js';
 import BottomNav  from './views/bottom_nav.js';
 import AppStyles from './styles/app_styles.js';
 
@@ -20,7 +19,6 @@ export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
-        <Header />
         <BottomNav />
       </View>
     );

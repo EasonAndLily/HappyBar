@@ -4,13 +4,15 @@ import {
   Text,
   View,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import Carousel from 'react-native-looped-carousel';
 import CarouselVideoStyles from '../../styles/home/carousel_video_styles.js';
 import {DEVICE} from '../../static/static_data.js';
 import APIS from '../../service/common/apis.js';
 import FetchUtils from '../../service/common/fetchUtils.js';
+import VideoPlayer from '../../views/video/video_player.js';
 
 const styles = StyleSheet.create(CarouselVideoStyles);
 export default class CarouselVideo extends Component {
@@ -22,8 +24,22 @@ export default class CarouselVideo extends Component {
       size: { 
         width: DEVICE.width, 
         "height" : 200 
-      }
+      },
+
     };
+
+    this.pressPush = this.pressPush.bind(this);
+    this.generateVideos = this.generateVideos.bind(this);
+  }
+
+  pressPush(comedy){
+    let nextPage ={
+            component: VideoPlayer,
+            passProps: {
+                comedy: comedy
+            }
+        };
+    this.props.navigation.navigate('VideoPlayer');
   }
 
   generateVideos(carouselComedies) {
@@ -31,9 +47,12 @@ export default class CarouselVideo extends Component {
     if (carouselComedies.length <= 0) {
       carousels.push(<View key="1"><Text>No Data</Text></View>);
     } else {
+      var that = this;
       carouselComedies.map((val)=> {
         carousels.push(<View key={val._id} style={styles.item}>
-                  <Image resizeMode="contain" source={{uri: val.poster}} style={styles.images}></Image>
+                  <TouchableOpacity onPress={()=>that.pressPush(val)}>
+                    <Image resizeMode="contain" source={{uri: val.poster}} style={styles.images}></Image>
+                  </TouchableOpacity>
                 </View>);
       });
     }

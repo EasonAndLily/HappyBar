@@ -6,7 +6,8 @@ import {
   View,
   ListView,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Image
 } from 'react-native';
 
 import HomeNav from './home_nav.js';
@@ -15,6 +16,8 @@ import ContentList from './content_list.js';
 import HomeStyles from '../../styles/home/home_styles.js';
 import APIS from '../../service/common/apis.js';
 import FetchUtils from '../../service/common/fetchUtils.js';
+import LogoTitle from './logo_title.js';
+import HeaderSearch from './header_search.js';
 
 const styles = StyleSheet.create(HomeStyles);
 export default class HomePage extends Component<> {
@@ -26,6 +29,18 @@ export default class HomePage extends Component<> {
       categoryComedies: []
     };
   }
+
+  static navigationOptions = ({ navigation }) => {
+    //const params = navigation.state.params || {};
+
+    return {
+      headerLeft: <LogoTitle />,
+      headerTitle: <HeaderSearch />,
+      headerStyle: {
+        height: 40
+      }
+    };
+  };
 
   componentDidMount() {
       this.getData();
@@ -54,7 +69,7 @@ export default class HomePage extends Component<> {
                 <RefreshControl refreshing={false} tintColor="red" 
                 title="freshing..." onRefresh={this.refresh}/>
               }>
-          <CarouselVideo carouselComedies={this.state.carouselComedies}/>
+          <CarouselVideo carouselComedies={this.state.carouselComedies} navigation={this.props.navigation}/>
           <ContentList categoryComedies={this.state.categoryComedies}/>
         </ScrollView>
       </View>
